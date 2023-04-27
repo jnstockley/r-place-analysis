@@ -1,33 +1,7 @@
 import csv
 import pandas as pd
 
-
-class Placement:
-    timestamp: str
-
-    user_id: str
-
-    pixel_color: str
-
-    x_coordinate: int
-
-    y_coordinate: int
-
-    def __init__(self, placement: list):
-        self.timestamp = placement[0]
-        self.user_id = placement[1]
-        self.pixel_color = placement[2]
-        coordinates = placement[3].split(",")
-        self.x_coordinate = int(coordinates[0])
-        self.y_coordinate = int(coordinates[1])
-
-    def __repr__(self):
-        return f"Timestamp: {self.timestamp}, Hashed User ID: {self.user_id}, Pixel Color: {self.pixel_color}, " \
-               f"Coordinates: <{self.x_coordinate}, {self.y_coordinate}>"
-
-    def __str__(self):
-        return f"{self.timestamp},{self.user_id},{self.pixel_color}"
-
+from python.placement import Placement
 
 turkey_flag = []
 mona_lisa = []
@@ -59,7 +33,7 @@ GUY_BOTTOM_RIGHT_X = 499
 GUY_TOP_LEFT_Y = 1699
 GUY_BOTTOM_RIGHT_Y = 1800
 
-with open('../data/data.csv', 'r') as file:
+with open('data/data.csv', 'r') as file:
     reader = csv.reader(file)
 
     for row in reader:
@@ -85,10 +59,10 @@ with open('../data/data.csv', 'r') as file:
                     [row.timestamp, row.user_id, row.pixel_color, f"{row.x_coordinate},{row.y_coordinate}"])
 
 REGION_NAME = "turkey-flag"
-pd.DataFrame(turkey_flag).to_csv(f"{REGION_NAME}.csv", index=False, header=header)
+pd.DataFrame(turkey_flag).to_csv(f"data/{REGION_NAME}.csv", index=False, header=header)
 REGION_NAME = "mona-lisa"
-pd.DataFrame(mona_lisa).to_csv(f"{REGION_NAME}.csv", index=False, header=header)
+pd.DataFrame(mona_lisa).to_csv(f"data/{REGION_NAME}.csv", index=False, header=header)
 REGION_NAME = "bear"
-pd.DataFrame(bear).to_csv(f"{REGION_NAME}.csv", index=False, header=header)
+pd.DataFrame(bear).to_csv(f"data/{REGION_NAME}.csv", index=False, header=header)
 REGION_NAME = "guy-with-racecar"
-pd.DataFrame(guy_with_racecar).to_csv(f"{REGION_NAME}.csv", index=False, header=header)
+pd.DataFrame(guy_with_racecar).to_csv(f"data/{REGION_NAME}.csv", index=False, header=header)
